@@ -1,4 +1,4 @@
-# ChumoGH-Script V4.8c
+# ChumoNixon-Script V4.8c
 
 # Proyecto sujeto a mejoras . . . . 
 
@@ -50,4 +50,4 @@ apt update -y; apt upgrade -y; wget -q https://raw.githubusercontent.com/ChumoGH
 WEB SITE
 www.chumogh.xyz
 
-**By: [ ChumoGH SCRIPTS ⃘⃤꙰✰ ]**
+**By: [ ChumoNixon SCRIPTS ⃘⃤꙰✰ ]**
