@@ -11,35 +11,28 @@ CPU=$(echo $usoo | awk '{printf("%d\n",$1 + 0.5)}')
 ##
 opti=$(cat < /bin/ejecutar/val)
 if [ "$opti" = "0" ]; then
-_opti="\033[1;31m${txt[11]}"
+_opti="\033[0;31m [OFF]"
 else
-_opti="\033[1;32m${txt[10]}"
+_opti="\033[0;31m [\033[0;32mON\033[0;31m]"
 fi
-[[ -e /etc/bash.bashrc-bakup ]] && _autorun="\033[1;32m${txt[10]}" || _autorun="\033[1;31m${txt[11]}"
+unset _usop _usor
+_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
+_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+
+[[ -e /etc/bash.bashrc-bakup ]] && _autorun="\033[0;31m [\033[0;32mON\033[0;31m] " || _autorun="\033[0;31m [OFF]"
 msg -bar #echo -e "${cor[1]} ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ${cor[0]}"
-#echo -e $pp $csss "CPUs"
-echo -e "\033[1;34m  ▴ \033[1;31m${txt[345]} \033[0;33m${txt[343]} "
-#echo -e "${cor[1]} ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ${cor[0]}"
-#echo -e "${cor[2]} ⌐╦╦═─ ${cor[5]} ${txt[4]}"
+#echo -e "${cor[2]} ‣ \033[1;37m${txt[3]} $_os ${cor[2]}‣ \033[1;37mBase:\033[1;31m$modelo1 ${cor[2]}‣ \033[1;37m${txt[346]}\033[1;31m $_core "
+echo -e "\033[1;34m ‣\033[1;31m TOTAL:\033[1;32m "$mt "\033[1;34m ‣ \033[1;31m Libre:\033[1;32m "$ram2 "\033[1;34m ‣ \033[1;31m Usada:\033[1;32m "$ram3
+echo -e "\033[1;34m ‣\033[1;31m Uso RAM:\033[1;32m"$_usor "\033[1;34m‣\033[1;31m Uso CPU:\033[1;32m$_usop \033[1;34m ‣\033[1;31m Cache:\033[1;32m"$mb # $CPU"%"
 msg -bar #echo -e "${cor[1]} ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ${cor[0]}"
-echo -e "\033[1;34m ▸\033[1;31m TOTAL:\033[1;32m "$mt "\033[1;34m ◂ \033[1;32m Libre:\033[1;31m "$ram2 "\033[1;34m ◂ \033[1;31m Usada:\033[1;32m "$ram3
-echo -e "\033[1;34m ▴\033[1;31m Uso RAM:\033[1;32m"$_usor "\033[1;34m▸\033[1;31m Uso CPU:\033[1;32m$_usop \033[1;34m ▸\033[1;31m Cache:\033[1;32m"$mb # $CPU"%"
-msg -bar #echo -e "${cor[1]} ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ${cor[0]}"
-echo -e "${cor[2]} [1] >${cor[3]} ${txt[5]} "
-echo -e "${cor[2]} [2] >${cor[3]} ${txt[6]}$_badvpn${cor[3]}${txt[455]}$_tcpspeed"
-echo -e "${cor[2]} [3] >${cor[0]}\033[0;33m [!]\033[1;32m OPTIMIZAR VPS "
-echo -e "${cor[2]} [4] >${cor[0]}\033[1;31m [!] ${txt[339]}"
-echo -e "${cor[2]} [5] >${cor[3]} ${txt[12]}"
-echo -e "${cor[2]} [6] >${cor[3]} ${txt[20]} $VERIFICAR_PID"
-echo -e "${cor[2]} [7] > \033[1;42m${txt[347]}\033[0;33m ${txt[342]}"
-##\033[0;33m [?]\033[1;32m ${txt[341]}\033[0;33m ${txt[342]} "
-echo -e "${cor[2]} [8] >${cor[3]} ${txt[322]} $_autorun"
-echo -e "${cor[2]} [9] >${cor[3]} ${txt[256]}"
-echo -e "${cor[2]} [10] >${cor[3]} Optimizacion Automatica $_opti"
-#echo -e "${cor[2]} [11] >${cor[3]} Optimizacion Automatica $_opti"
-echo -e "${cor[2]} [99] >\033[0;33m [!] ${txt[340]}\033[1;32m"
-#echo -e "${cor[2]} [0] >${cor[4]} ${txt[13]}"
-echo -ne "$(msg -verd " [0]") $(msg -verm2 ">") "&& msg -bra "\033[1;41m[Regresar / Salir]"
-msg -bar #echo -e "${cor[1]} ▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪ ${cor[0]}"
-#  ceniza
-#\033[1;41m rojo
+echo -e "\033[0;35m [\033[0;36m1\033[0;35m]\033[0;31m ➮${cor[3]} ADMINISTRAR USUARIOS "
+echo -e "\033[0;35m [\033[0;36m2\033[0;35m]\033[0;31m ➮${cor[3]} HERRAMIENTAS (\033[0;34mBad/VPN$_badvpn${cor[3]}) (\033[0;34mTCP-SPEED$_tcpspeed${cor[3]})"
+echo -e "\033[0;35m [\033[0;36m3\033[0;35m]\033[0;31m ➮\033[0;33m [!]${cor[3]} OPTIMIZAR VPS "
+echo -e "\033[0;35m [\033[0;36m4\033[0;35m]\033[0;31m ➮\033[0;33m [!]\033[0;31m DESINSTALAR SCRIPT"
+echo -e "\033[0;35m [\033[0;36m6\033[0;35m]\033[0;31m ➮${cor[3]} Cont/Limit DE USUARIOS $VERIFICAR_PID"
+echo -e "\033[0;35m [\033[0;36m7\033[0;35m]\033[0;31m ➮ \e[3;32mHERRAMIENTAS BETA\e[0m \033[0;33m (#EXPERIMENTAL)"
+echo -e "\033[0;35m [\033[0;36m8\033[0;35m]\033[0;31m ➮${cor[3]} AUTOINICIAR SCRIPT $_autorun"
+echo -e "\033[0;35m [\033[0;36m9\033[0;35m]\033[0;31m ➮${cor[3]} INSTALADOR DE PROTOCOLOS"
+msg -bar
+echo -ne "\033[0;35m [\033[0;36m10\033[0;35m]\033[0;31m ➮\033[0;33m [!] \033[1;32mACTUALIZAR${cor[3]}  |" && echo -e " \033[0;35m [\033[0;36m0\033[0;35m]\033[0;31m ➮ $(msg -bra "\033[1;41m[ Salir ]\e[0m")"
+msg -bar 
